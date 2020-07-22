@@ -1,6 +1,8 @@
 # ansible-mongodb-3.6-initial-setup
 
-Ansible playbook to configure mongodb for replication ready, and to configure datadog to monitor mongodb metrics. This playbooks only work for ubuntu machines. This playbook configures several things:
+Ansible playbook to configure mongodb for replication ready, and to configure datadog to monitor mongodb metrics. This playbooks only work for ubuntu machines. 
+
+This playbook configures several things:
 - set hostname of mongodb instance.
 - mount and format ebs volume for mongodb to /var/lib/mongodb
 - set datadog key for datadog agent
@@ -25,11 +27,11 @@ These variables are required to run this playbook.
     - name: replica_set_name
       description: name of the replica set / mongodb cluster, if you are migrating from multi account you need to use the same replica_set_name
       example: tsidatarepl
-    - name: volume_defice
+    - name: volume_device
       description: name of the device volume to be mounted to store mongodb data
-      example: /deb/xvdb
+      example: /dev/xvdb
     - name: mongodb_repl_oplog_size
-      description: : size of the mongo oplog in MB
+      description: : Size of the mongo oplog in MB
       example: 10000
     - name: hostname
       description: FQDN for mongodb instance
@@ -38,7 +40,7 @@ These variables are required to run this playbook.
       description: temporary master password for initial root user
       example: don'tusethisunsecuredpassword
     - name: keyfile
-      description: keyfile for mongodb cluster between instances to authenticate, by defaul this playbook will lookup the keyfile in `/tmp/keyfile`, you can     generate key file and store it in /tmp/key file by running this command `openssl rand -base64 741 > /tmp/keyfile`
+      description: keyfile for mongodb cluster between instances to authenticate, by defaul this playbook will lookup the keyfile in `/tmp/keyfile`, you can generate key file and store it in /tmp/key file by running this command `openssl rand -base64 741 > /tmp/keyfile`
     - name: datadog_api_key
       description: api key for datadog agent, by default this playbook will look at your parameter store with path `/tvlk-secret/shared/<changethiswithyourpd>/datadog.api.key`, you need to make sure this path is exist and contains the correct datadog api key
 
